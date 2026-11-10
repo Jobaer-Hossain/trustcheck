@@ -41,7 +41,7 @@ function drawWaveform(jitterRatio = 0.8, isAI = false) {
   if (!ctx) return;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 2.5;
   ctx.strokeStyle = isAI ? "#f43f5e" : "#10b981";
   ctx.beginPath();
 
@@ -99,14 +99,14 @@ function renderReport(report) {
   const badgeEl = document.getElementById("verdict-badge");
 
   if (report.trust_score_pct >= 80) {
-    scoreValEl.className = "text-5xl font-extrabold text-emerald-400";
-    badgeEl.className = "mt-3 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 inline-block";
+    scoreValEl.className = "text-5xl font-extrabold text-emerald-600";
+    badgeEl.className = "mt-3 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 inline-block";
   } else if (report.trust_score_pct >= 50) {
-    scoreValEl.className = "text-5xl font-extrabold text-amber-400";
-    badgeEl.className = "mt-3 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 inline-block";
+    scoreValEl.className = "text-5xl font-extrabold text-amber-600";
+    badgeEl.className = "mt-3 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 inline-block";
   } else {
-    scoreValEl.className = "text-5xl font-extrabold text-rose-500";
-    badgeEl.className = "mt-3 px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 inline-block";
+    scoreValEl.className = "text-5xl font-extrabold text-rose-600";
+    badgeEl.className = "mt-3 px-3 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 inline-block";
   }
 
   badgeEl.innerText = report.verdict;
@@ -127,25 +127,25 @@ function renderReport(report) {
 
   if (report.detected_anomalies.length === 0) {
     countBadge.innerText = "0 Anomalies Detected";
-    countBadge.className = "px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-500/20 text-emerald-300";
+    countBadge.className = "px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200";
     container.innerHTML = `
-      <div class="p-4 rounded-xl bg-gray-900/40 border border-gray-800 text-center text-xs text-emerald-400">
+      <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center text-xs text-emerald-700 font-medium">
         ✔ All biological speech metrics fall within normal human vocal cord parameters.
       </div>
     `;
   } else {
     countBadge.innerText = `${report.detected_anomalies.length} Anomalies Flagged`;
-    countBadge.className = "px-2.5 py-1 text-xs font-semibold rounded-full bg-rose-500/20 text-rose-300";
+    countBadge.className = "px-2.5 py-1 text-xs font-semibold rounded-full bg-rose-50 text-rose-700 border border-rose-200";
 
     report.detected_anomalies.forEach(a => {
       const card = document.createElement("div");
-      card.className = "p-3.5 rounded-xl bg-gray-900/80 border border-rose-500/30 space-y-1.5 text-xs";
+      card.className = "p-3.5 rounded-xl bg-rose-50/50 border border-rose-200 space-y-1.5 text-xs";
       card.innerHTML = `
         <div class="flex items-center justify-between">
-          <span class="font-bold text-rose-400">${a.feature_name}</span>
-          <span class="text-gray-400 font-mono text-[11px]">Observed: ${a.observed_value} (Normal: ${a.expected_human_range})</span>
+          <span class="font-bold text-rose-700">${a.feature_name}</span>
+          <span class="text-slate-500 font-mono text-[11px]">Observed: ${a.observed_value} (Normal: ${a.expected_human_range})</span>
         </div>
-        <p class="text-gray-300 leading-relaxed">${a.explanation}</p>
+        <p class="text-slate-700 leading-relaxed">${a.explanation}</p>
       `;
       container.appendChild(card);
     });
