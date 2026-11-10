@@ -70,13 +70,13 @@ def run_demo_sample(sample_type: str):
             samples.append(val)
         file_name = "authentic_human_caller.wav"
     else:
-        # Simulates AI voice clone: zero jitter (quantized pitch) + high frequency flat noise
+        # Simulates synthesized vocoder audio: quantized pitch with high-frequency harmonic artifacts
         samples = []
         for i in range(n):
             freq = 155.0  # perfectly flat pitch
             val = 0.6 * math.sin(2 * math.pi * freq * (i / rate)) + (0.05 * math.sin(i * 0.9))
             samples.append(val)
-        file_name = "synthetic_ai_voice_clone.wav"
+        file_name = "synthesized_voice_sample.wav"
 
     # Encode as WAV
     pcm = b"".join(struct.pack("<h", int(max(-1.0, min(1.0, s)) * 32767)) for s in samples)

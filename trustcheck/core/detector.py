@@ -73,11 +73,11 @@ class DeepfakeDetector:
         elif final_score >= 50.0:
             verdict = TrustVerdict.SUSPICIOUS_SYNTHESIS
             color = "amber"
-            summary = "Borderline acoustic anomalies detected. Potential voice clone, heavy audio compression, or AI-enhanced speech filter."
+            summary = "Borderline acoustic anomalies detected. Potential voice clone, heavy audio compression, or digital speech processing filter."
         else:
             verdict = TrustVerdict.HIGH_CONFIDENCE_DEEPFAKE
             color = "rose"
-            summary = "Critical neural vocoder synthesis artifacts identified. High probability of AI voice cloning or synthetic voice deepfake."
+            summary = "Critical neural vocoder synthesis artifacts identified. High probability of synthesized voice clone or deepfake audio."
 
         return VoiceTrustReport(
             file_name=file_name,
